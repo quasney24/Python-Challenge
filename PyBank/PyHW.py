@@ -20,32 +20,28 @@ Greatest Decrease in Revenue: Aug-12 ($-652794)
 '''
 import os 
 import csv
-#import pandas as pd
 
 #build path to CSV 1 & 2
 PyBank_CSV_1 = os.path.join("raw_data", "budget_data_1.csv")
 
-#data_file_pd = pd.read_csv(PyBank_CSV_1)
-#SumRev = data_file_pd["Revenue"].sum()
-#print (SumRev)
-
-
-
+#Read CSV
 with open (PyBank_CSV_1, 'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
     
+    #ignore headers
     next(csvreader)
     
+    #empty lists for date and revenue
     date = []
     revenue = []
 
     #Start of Loop
-    
     for row in csvreader:
+        #append date & revenue to empty list
         date.append(row[0])
         revenue.append(int(row[1]))
-        #avChange.append(row[1]) 
         
+        #calculate the total months & total revenue
         total_months = len(date)
         total_revenue = sum(revenue)
         
@@ -63,6 +59,8 @@ with open (PyBank_CSV_1, 'r') as csvfile:
     greatest_decrease = min(total_diff_list)
 #store the index where min is 
     position_decrease_index = total_diff_list.index(greatest_decrease)
+    
+    #print for days 
     print("Financial Analysis")  
     print("--------------------------")
     print ("Total Months: ", total_months)
